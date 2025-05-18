@@ -13,8 +13,21 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+  'https://salon-frontend-ebon.vercel.app',
+  'https://salon-frontend-pbeoy010p-anas-projects-dfbef841.vercel.app'
+];
+
 app.use(cors({
-  origin: 'https://salon-frontend-ebon.vercel.app',
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
