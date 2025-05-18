@@ -18,6 +18,8 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+app.use(express.json());
+
 // Validate environment variables
 const requiredEnv = ['MONGO_URI', 'JWT_SECRET', 'EMAIL_USER', 'EMAIL_PASS', 'STRIPE_SECRET_KEY', 'ADMIN_EMAIL'];
 requiredEnv.forEach(key => {
@@ -26,10 +28,6 @@ requiredEnv.forEach(key => {
     process.exit(1);
   }
 });
-
-// Middleware
-app.use(cors());
-app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
