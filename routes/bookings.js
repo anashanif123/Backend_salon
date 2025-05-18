@@ -62,8 +62,8 @@ router.post('/', auth, async (req, res) => {
             quantity: 1,
           }],
           mode: 'payment',
-          success_url: 'http://localhost:5173/booking/success',
-          cancel_url: 'http://localhost:5173/booking/cancel',
+          success_url: 'https://salon-frontend-ebon.vercel.app/booking/success',
+          cancel_url: 'https://salon-frontend-ebon.vercel.app/booking/cancel',
         });
         console.log('Stripe session created:', session.id);
       } catch (stripeError) {
